@@ -26,7 +26,14 @@ class Board
         end
     end
 
+    def move_piece(start_pos,end_pos)
+        piece = self[start_pos]
+        raise ArgumentError.new("No piece is present here") if piece.nil?
+        self[start_pos] = nil
+        self[end_pos] = piece
+    end
+
 end
 
-x = Board.new
-puts x
+# x = Board.new
+# puts x
