@@ -2,7 +2,8 @@ require_relative 'piece'
 require 'byebug'
 class Board
     def initialize
-        @rows = Array.new(8) { Array.new(8) { nil } }
+        @null = NullPiece.instance
+        @rows = Array.new(8) { Array.new(8) { @null } }
         populate_board
     end
 
