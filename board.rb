@@ -18,12 +18,33 @@ class Board
 
     def populate_board
         # debugger
-        [0,1,6,7].each do |row_idx|
-            row = @rows[row_idx]
-            row.each_with_index do |_,col_idx|
-                self[[row_idx,col_idx]] = Piece.new('blue',self,[row_idx,col_idx])
+        populate_back_rows
+        populate_front_rows
+    end
+
+    def populate_back_rows
+        back_row = [Rook,Knight,Bishop,King,Queen,Bishop,Knight,Rook]
+        [0,7].each do |row|
+            back_row.each_with_index do |type, col|
+                color = row == 0 ? :black : :white
+                pos = [row,col]
+                piece = type.new(color,self,pos)
+                add_piece(piece,pos)
             end
         end
+    end
+
+    def populate_front_rows
+        [1,6].each do |row|
+            @rows[row].each_with_index do |el,col|
+                color = row == 1 ? :black : :white
+                add_piece(Pawn.new(color,self,[row,col]),[row,col])
+            end
+        end
+    end
+
+    def add_piece(piece,pos)
+        self[pos] = piece
     end
 
     def move_piece(start_pos,end_pos)
