@@ -2,6 +2,7 @@ require 'singleton'
 require_relative 'slideable'
 class Piece
     attr_accessor :pos
+    attr_reader :color, :board
     def initialize(color,board,pos)
         @color = color
         @board = board
@@ -13,12 +14,12 @@ class Piece
         end_object = @board[end_pos]
         return :empty if end_object.is_a?(NullPiece)
         return :enemyFilled if end_object.color != @color
-        return :friendlyFilled if end_object.color = @color
+        return :friendlyFilled if end_object.color == @color
     end
 
     def valid_moves
         moves.select do |end_pos|
-            result = move_into_check(end_pos)
+            result = move_into_check?(end_pos)
             result == :empty || result == :enemyFilled
         end
     end
@@ -31,6 +32,7 @@ class Knight < Piece
 end
 
 class Bishop < Piece
+    include Slideable
     def initialize(color,board,pos)
         super(color,board,pos)
     end
