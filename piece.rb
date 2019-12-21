@@ -1,5 +1,6 @@
 require 'singleton'
 require_relative 'slideable'
+require_relative 'stepable'
 class Piece
     attr_accessor :pos
     attr_reader :color, :board
@@ -26,8 +27,13 @@ class Piece
 end
 
 class Knight < Piece
+    include Stepable
     def initialize(color,board,pos)
         super(color,board,pos)
+    end
+
+    def move_diffs
+        [[1,-2],[1,2],[-1,-2],[-1,2],[2,-1],[2,1],[-2,-1],[-2,1]]
     end
 end
 
