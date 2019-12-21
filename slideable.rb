@@ -19,14 +19,19 @@ module Slideable
     end
 
     def grow_unblocked_moves_in_dir(dx,dy)
+        # debugger
         new_moves = []
         current_row, current_col = pos
-        new_pos = [current_row+dx,current_col+dy]
-        until move_into_check?(new_pos) == :out_of_bounds
+        current_row += dx
+        current_col += dy
+        new_pos = [current_row,current_col]
+        check_output = move_into_check?(new_pos)
+        until check_output != :empty 
             new_moves << new_pos
             current_row += dx
             current_col += dy
             new_pos = [current_row,current_col]
+            check_output = move_into_check?(new_pos)
         end
         new_moves
     end
