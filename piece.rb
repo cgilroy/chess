@@ -43,8 +43,13 @@ class Bishop < Piece
 end
 
 class Rook < Piece
+    include Slideable
     def initialize(color,board,pos)
         super(color,board,pos)
+    end
+
+    def move_dirs
+        diagonal_dirs + horizontal_dirs
     end
 end
 
