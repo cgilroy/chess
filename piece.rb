@@ -86,6 +86,14 @@ class Pawn < Piece
         super(color,board,pos)
     end
 
+    def move_dirs
+        step = forward_dir
+        dirs = [[pos[0]+step,pos[1]]]
+        dirs << [pos[0]+step*2,pos[1]] if at_start_row?
+        dirs.concat(side_attacks)
+        dirs
+    end
+
     def at_start_row?
         current_row = pos[0]
         return true if (current_row == 1 && color == :black) || (current_row == 6 && color == :white)
