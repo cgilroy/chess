@@ -85,6 +85,13 @@ class Pawn < Piece
     def initialize(color,board,pos)
         super(color,board,pos)
     end
+
+    def at_start_row?
+        current_row = pos[0]
+        return true if (current_row == 1 && color == :black) || (current_row == 6 && color == :white)
+        false
+    end
+    
 end
 
 class NullPiece < Piece
