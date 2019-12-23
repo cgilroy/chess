@@ -10,7 +10,7 @@ class Piece
         @pos = pos
     end
 
-    def move_into_check?(end_pos)
+    def move_into_check(end_pos)
         return :out_of_bounds if !end_pos[0].between?(0,7) || !end_pos[1].between?(0,7)
         end_object = @board[end_pos]
         return :empty if end_object.is_a?(NullPiece)
@@ -94,6 +94,17 @@ class Pawn < Piece
 
     def forward_dir
         color == :black ? 1 : -1
+    end
+
+    def side_attacks
+        # debugger
+        attacks = []
+        step = forward_dir
+        [[step,1],[step,-1]].each do |h,v|
+            check_pos = [pos[0]+h,pos[1]+v]
+            attacks << check_pos if move_into_check(check_pos) == :enemyFilled
+        end
+        attacks
     end
     
 end

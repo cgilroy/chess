@@ -25,13 +25,13 @@ module Slideable
         current_row += dx
         current_col += dy
         new_pos = [current_row,current_col]
-        check_output = move_into_check?(new_pos)
+        check_output = move_into_check(new_pos)
         until check_output != :empty 
             new_moves << new_pos
             current_row += dx
             current_col += dy
             new_pos = [current_row,current_col]
-            check_output = move_into_check?(new_pos)
+            check_output = move_into_check(new_pos)
         end
         new_moves
     end
