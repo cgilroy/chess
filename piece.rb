@@ -91,6 +91,10 @@ class Pawn < Piece
         return true if (current_row == 1 && color == :black) || (current_row == 6 && color == :white)
         false
     end
+
+    def forward_dir
+        color == :black ? 1 : -1
+    end
     
 end
 
