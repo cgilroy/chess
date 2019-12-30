@@ -51,6 +51,7 @@ class Board
     def move_piece(start_pos,end_pos)
         piece = self[start_pos]
         raise ArgumentError.new("No piece is present here") if piece == @null
+        raise ArgumentError.new("Invalid end position") if !piece.valid_moves.include?(end_pos)
         self[start_pos] = @null
         self[end_pos] = piece
         piece.pos = end_pos
