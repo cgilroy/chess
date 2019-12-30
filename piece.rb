@@ -20,7 +20,7 @@ class Piece
 
     def valid_moves
         moves.select do |end_pos|
-            result = move_into_check?(end_pos)
+            result = move_into_check(end_pos)
             result == :empty || result == :enemyFilled
         end
     end
@@ -86,9 +86,10 @@ class Pawn < Piece
         super(color,board,pos)
     end
 
-    def move_dirs
+    def moves
         step = forward_dir
-        dirs = [[pos[0]+step,pos[1]]]
+        dirs = []
+        dirs = [[pos[0]+step,pos[1]]] if move_into_check([pos[0]+step,pos[1]]) == :empty
         dirs << [pos[0]+step*2,pos[1]] if at_start_row?
         dirs.concat(side_attacks)
         dirs
