@@ -11,18 +11,27 @@ class Display
     end
 
     def render
-        debugger
+        # debugger
         (0..7).each do |row|
             row_str = ""
             (0..7).each do |col|
                 if @cursor.cursor_pos == [row,col]
-                    char = @board[[row,col]].symbol.colorize(:background => :red)
+                    color = @cursor.selected ? :red : :blue
+                    char = @board[[row,col]].symbol.colorize(:background => color)
                 else
                     char = @board[[row,col]].symbol
                 end
                 row_str += char + " "
             end
             puts row_str
+        end
+    end
+
+    def test_loop
+        loop do
+            system 'clear'
+            render
+            @cursor.get_input
         end
     end
 end
