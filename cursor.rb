@@ -76,11 +76,11 @@ class Cursor
   end
 
   def handle_key(key)
-    debugger
+    # debugger
     case key
-    when :return || :space
+    when :return, :space
       return @cursor_pos
-    when :left || :right || :up || :down
+    when :left, :right, :up, :down
       update_pos(MOVES[key])
       return nil
     when :ctrl_c
@@ -93,5 +93,6 @@ class Cursor
   def update_pos(diff)
     diff_x, diff_y = diff
     new_pos = [@cursor_pos[0]+diff_x,@cursor_pos[1]+diff_y]
+    @cursor_pos = new_pos if @board.valid_pos?(new_pos)
   end
 end

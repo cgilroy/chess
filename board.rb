@@ -57,6 +57,13 @@ class Board
         piece.pos = end_pos
     end
 
+    def valid_pos?(pos)
+        # debugger
+        x,y = pos
+        return true unless x < 0 || x > 7 || y < 0 || y > 7
+        false
+    end
+
 end
 
 # x = Board.new
