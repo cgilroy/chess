@@ -64,6 +64,30 @@ class Board
         false
     end
 
+    def in_check?(color)
+        king_pos = find_king(color).pos
+        pieces.each do |piece|
+            return true if piece.valid_moves.include?(king_pos)
+        end
+        false
+    end
+
+    def find_king(color)
+        pieces.each do |piece|
+            return piece if piece.is_a?(King) && color == piece.color
+        end
+    end
+
+    def pieces
+        output = []
+        (0..7).each do |row|
+            (0..7).each do |col|
+                piece = self[[row,col]]
+                output << piece unless piece.is_a?(NullPiece)
+            end
+        end
+        output
+    end
 end
 
 # x = Board.new
