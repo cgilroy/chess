@@ -69,15 +69,29 @@ class Cursor
       input << STDIN.read_nonblock(2) rescue nil
     end
 
-    STDIN.echo = true # the console prints return values again
+    # STDIN.echo = true # the console prints return values again
     STDIN.cooked! # the opposite of raw mode :)
 
     return input
   end
 
   def handle_key(key)
+    debugger
+    case key
+    when :return || :space
+      return @cursor_pos
+    when :left || :right || :up || :down
+      update_pos(MOVES[key])
+      return nil
+    when :ctrl_c
+      exit
+    else
+      return nil
+    end
   end
 
   def update_pos(diff)
+    diff_x, diff_y = diff
+    new_pos = [@cursor_pos[0]+diff_x,@cursor_pos[1]+diff_y]
   end
 end
