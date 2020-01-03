@@ -32,6 +32,10 @@ class Knight < Piece
         super(color,board,pos)
     end
 
+    def symbol
+        "K"
+    end
+
     def move_diffs
         [[1,-2],[1,2],[-1,-2],[-1,2],[2,-1],[2,1],[-2,-1],[-2,1]]
     end
@@ -41,6 +45,10 @@ class Bishop < Piece
     include Slideable
     def initialize(color,board,pos)
         super(color,board,pos)
+    end
+
+    def symbol
+        "B"
     end
 
     def move_dirs
@@ -54,6 +62,10 @@ class Rook < Piece
         super(color,board,pos)
     end
 
+    def symbol
+        "R"
+    end
+
     def move_dirs
         horizontal_dirs
     end
@@ -63,6 +75,10 @@ class Queen < Piece
     include Slideable
     def initialize(color,board,pos)
         super(color,board,pos)
+    end
+
+    def symbol
+        "Q"
     end
 
     def move_dirs
@@ -76,6 +92,10 @@ class King < Piece
         super(color,board,pos)
     end
 
+    def symbol
+        "Y"
+    end
+
     def move_diffs
         [[1,1],[1,-1],[-1,1],[-1,-1],[1,0],[0,1],[-1,0],[0,-1]]
     end
@@ -84,6 +104,10 @@ end
 class Pawn < Piece
     def initialize(color,board,pos)
         super(color,board,pos)
+    end
+
+    def symbol
+        "P"
     end
 
     def moves
@@ -122,5 +146,9 @@ class NullPiece < Piece
     include Singleton
     def initialize
 
+    end
+
+    def symbol
+        "_"
     end
 end
