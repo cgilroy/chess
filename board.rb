@@ -72,6 +72,12 @@ class Board
         false
     end
 
+    def checkmate?(color)
+        king = find_king(color)
+        return true if in_check?(color) && king.valid_moves.length == 0
+        false
+    end
+
     def find_king(color)
         pieces.each do |piece|
             return piece if piece.is_a?(King) && color == piece.color
