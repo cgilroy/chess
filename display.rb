@@ -15,16 +15,22 @@ class Display
         (0..7).each do |row|
             row_str = ""
             (0..7).each do |col|
-                if @cursor.cursor_pos == [row,col]
-                    color = @cursor.selected ? :red : :blue
-                    char = @board[[row,col]].symbol.colorize(:background => color)
-                else
-                    char = @board[[row,col]].symbol
-                end
-                row_str += char + " "
+                color = get_tile_bg_color(row,col)
+                str = " " + @board[[row,col]].symbol + " "
+                char = str.colorize(:background => color)
+                row_str += char
             end
             puts row_str
         end
+    end
+
+    def get_tile_bg_color(row,col)
+        if @cursor.cursor_pos == [row,col]
+            color = @cursor.selected ? :red : :blue
+        else
+            color = (col.even? && row.even?) || (col.odd? && row.odd?) ? :magenta : :green
+        end
+        color
     end
 
     def test_loop
