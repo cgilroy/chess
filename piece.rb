@@ -19,6 +19,7 @@ class Piece
     end
 
     def valid_moves
+        # debugger
         moves.select do |end_pos|
             result = move_into_check(end_pos)
             result == :empty || result == :enemyFilled
@@ -33,7 +34,7 @@ class Knight < Piece
     end
 
     def symbol
-        "K"
+        "N"
     end
 
     def move_diffs
@@ -93,7 +94,7 @@ class King < Piece
     end
 
     def symbol
-        "Y"
+        "K"
     end
 
     def move_diffs
