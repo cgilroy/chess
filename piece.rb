@@ -150,6 +150,6 @@ class NullPiece < Piece
     end
 
     def symbol
-        "_"
+        " "
     end
 end
