@@ -17,7 +17,7 @@ class Display
             (0..7).each do |col|
                 color = get_tile_bg_color(row,col)
                 str = " " + @board[[row,col]].symbol + " "
-                char = str.colorize(:background => color)
+                char = str.colorize(:color => @board[[row,col]].color, :background => color)
                 row_str += char
             end
             puts row_str
