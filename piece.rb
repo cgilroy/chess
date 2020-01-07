@@ -1,6 +1,7 @@
 require 'singleton'
 require_relative 'slideable'
 require_relative 'stepable'
+require_relative 'board'
 class Piece
     attr_accessor :pos
     attr_reader :color, :board
@@ -10,7 +11,7 @@ class Piece
         @pos = pos
     end
 
-    def move_into_check(end_pos)
+    def destination_square_type(end_pos)
         return :out_of_bounds if !end_pos[0].between?(0,7) || !end_pos[1].between?(0,7)
         end_object = @board[end_pos]
         return :empty if end_object.is_a?(NullPiece)
@@ -18,11 +19,19 @@ class Piece
         return :friendlyFilled if end_object.color == @color
     end
 
+    def move_into_check?(end_pos)
+        new_board = dup
+    end
+
+    def dup
+        test_board = Board.new
+        
+    end
+
     def valid_moves
         # debugger
         moves.select do |end_pos|
-            result = move_into_check(end_pos)
-            result == :empty || result == :enemyFilled
+            move_into_check?(end_pos) == false
         end
     end
 end
@@ -114,7 +123,7 @@ class Pawn < Piece
     def moves
         step = forward_dir
         dirs = []
-        dirs = [[pos[0]+step,pos[1]]] if move_into_check([pos[0]+step,pos[1]]) == :empty
+        dirs = [[pos[0]+step,pos[1]]] if destination_square_type([pos[0]+step,pos[1]]) == :empty
         dirs << [pos[0]+step*2,pos[1]] if at_start_row?
         dirs.concat(side_attacks)
         dirs
@@ -136,7 +145,7 @@ class Pawn < Piece
         step = forward_dir
         [[step,1],[step,-1]].each do |h,v|
             check_pos = [pos[0]+h,pos[1]+v]
-            attacks << check_pos if move_into_check(check_pos) == :enemyFilled
+            attacks << check_pos if destination_square_type(check_pos) == :enemyFilled
         end
         attacks
     end
