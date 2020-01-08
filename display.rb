@@ -12,6 +12,8 @@ class Display
 
     def render
         # debugger
+        piece = @board[@cursor.cursor_pos]
+        puts "valid moves: #{piece.valid_moves}" if !piece.is_a?(NullPiece)
         puts "   0  1  2  3  4  5  6  7"
         (0..7).each do |row|
             row_str = "#{row} "
