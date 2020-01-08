@@ -49,9 +49,18 @@ class Board
     end
 
     def move_piece(start_pos,end_pos)
+        # debugger
         piece = self[start_pos]
         raise ArgumentError.new("No piece is present here") if piece == @null
-        raise ArgumentError.new("Invalid end position") if !piece.valid_moves.include?(end_pos)
+        raise ArgumentError.new("Invalid end position") if !piece.moves.include?(end_pos)
+        raise ArgumentError.new("This would move you into check!") if piece.move_into_check?(end_pos)
+        self[start_pos] = @null
+        self[end_pos] = piece
+        piece.pos = end_pos
+    end
+
+    def move_piece!(start_pos,end_pos)
+        piece = self[start_pos]
         self[start_pos] = @null
         self[end_pos] = piece
         piece.pos = end_pos
@@ -67,14 +76,16 @@ class Board
     def in_check?(color)
         king_pos = find_king(color).pos
         pieces.each do |piece|
-            return true if piece.valid_moves.include?(king_pos)
+            return true if piece.moves.include?(king_pos)
         end
         false
     end
 
     def checkmate?(color)
+        debugger
         king = find_king(color)
-        return true if in_check?(color) && king.valid_moves.length == 0
+        any_moves = pieces.any? { |piece| color == piece.color && piece.valid_moves.length != 0 }
+        return true if in_check?(color) && !any_moves
         false
     end
 

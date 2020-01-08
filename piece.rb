@@ -20,7 +20,10 @@ class Piece
     end
 
     def move_into_check?(end_pos)
-        # new_board = dup
+        # debugger
+        duped_board = board_dup
+        duped_board.move_piece!(@pos,end_pos)
+        return true if duped_board.in_check?(@color)
         false
     end
 
