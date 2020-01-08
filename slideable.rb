@@ -25,7 +25,7 @@ module Slideable
         current_row += dx
         current_col += dy
         new_pos = [current_row,current_col]
-        check_output = move_into_check(new_pos)
+        check_output = destination_square_type(new_pos)
         last_output = nil
         until check_output == :out_of_bounds || check_output == :friendlyFilled || last_output == :enemyFilled
             new_moves << new_pos
@@ -33,7 +33,7 @@ module Slideable
             current_col += dy
             new_pos = [current_row,current_col]
             last_output = check_output
-            check_output = move_into_check(new_pos)
+            check_output = destination_square_type(new_pos)
         end
         new_moves
     end
