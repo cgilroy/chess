@@ -20,12 +20,26 @@ class Piece
     end
 
     def move_into_check?(end_pos)
-        new_board = dup
+        # new_board = dup
+        false
     end
 
-    def dup
+    def board_dup
+        # debugger
         test_board = Board.new
-        
+        (0..7).each do |row|
+            (0..7).each do |col|
+                copy_piece = @board[[row,col]]
+                if !copy_piece.is_a?(NullPiece)
+                    new_piece = copy_piece.class.new(copy_piece.color,test_board,copy_piece.pos)
+                    new_piece.board = test_board
+                else
+                    new_piece = NullPiece.instance
+                end 
+                test_board[[row,col]] = new_piece
+            end
+        end
+        test_board
     end
 
     def valid_moves
@@ -33,6 +47,10 @@ class Piece
         moves.select do |end_pos|
             move_into_check?(end_pos) == false
         end
+    end
+
+    def board=(board)
+        @board = board
     end
 end
 
