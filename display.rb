@@ -32,7 +32,7 @@ class Display
         if @cursor.cursor_pos == [row,col]
             color = @cursor.selected ? :red : :blue
         else
-            color = (col.even? && row.even?) || (col.odd? && row.odd?) ? :magenta : :green
+            color = (col.even? && row.even?) || (col.odd? && row.odd?) ? :green : :magenta
         end
         color
     end
