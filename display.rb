@@ -14,18 +14,18 @@ class Display
         # debugger
         piece = @board[@cursor.cursor_pos]
         # puts "valid moves: #{piece.valid_moves}" if !piece.is_a?(NullPiece)
-        puts "   0  1  2  3  4  5  6  7"
+        # puts "   0  1  2  3  4  5  6  7"
         (0..7).each do |row|
-            row_str = "#{row} "
+            row_str = ""
             (0..7).each do |col|
                 color = get_tile_bg_color(row,col)
                 str = " " + @board[[row,col]].symbol + " "
                 char = str.colorize(:color => @board[[row,col]].color, :background => color)
                 row_str += char
             end
-            puts row_str + " #{row}"
+            puts row_str
         end
-        puts "   0  1  2  3  4  5  6  7"
+        # puts "   0  1  2  3  4  5  6  7"
     end
 
     def get_tile_bg_color(row,col)
