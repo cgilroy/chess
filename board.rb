@@ -82,8 +82,7 @@ class Board
     end
 
     def checkmate?(color)
-        debugger
-        king = find_king(color)
+        # debugger
         any_moves = pieces.any? { |piece| color == piece.color && piece.valid_moves.length != 0 }
         return true if in_check?(color) && !any_moves
         false
