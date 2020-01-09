@@ -52,7 +52,7 @@ class Board
         # debugger
         piece = self[start_pos]
         raise ArgumentError.new("No piece is present here") if piece == @null
-        raise ArgumentError.new("Invalid end position") if !piece.moves.include?(end_pos)
+        raise ArgumentError.new("Invalid move") if !piece.moves.include?(end_pos)
         raise ArgumentError.new("This would move you into check!") if piece.move_into_check?(end_pos)
         self[start_pos] = @null
         self[end_pos] = piece
