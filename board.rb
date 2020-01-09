@@ -24,7 +24,7 @@ class Board
     end
 
     def populate_back_rows
-        back_row = [Rook,Knight,Bishop,King,Queen,Bishop,Knight,Rook]
+        back_row = [Rook,Knight,Bishop,Queen,King,Bishop,Knight,Rook]
         [0,7].each do |row|
             back_row.each_with_index do |type, col|
                 color = row == 0 ? :black : :white
