@@ -145,7 +145,7 @@ class Pawn < Piece
         step = forward_dir
         dirs = []
         dirs = [[pos[0]+step,pos[1]]] if destination_square_type([pos[0]+step,pos[1]]) == :empty
-        dirs << [pos[0]+step*2,pos[1]] if at_start_row?
+        dirs << [pos[0]+step*2,pos[1]] if at_start_row? && destination_square_type([pos[0]+step*2,pos[1]]) == :empty
         dirs.concat(side_attacks)
         dirs
     end
