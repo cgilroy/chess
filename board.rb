@@ -18,7 +18,6 @@ class Board
     end
 
     def populate_board
-        # debugger
         populate_back_rows
         populate_front_rows
     end
@@ -49,7 +48,6 @@ class Board
     end
 
     def move_piece(start_pos,end_pos)
-        # debugger
         piece = self[start_pos]
         raise ArgumentError.new("No piece is present here") if piece == @null
         raise ArgumentError.new("Invalid move") if !piece.moves.include?(end_pos)
@@ -67,7 +65,6 @@ class Board
     end
 
     def valid_pos?(pos)
-        # debugger
         x,y = pos
         return true unless x < 0 || x > 7 || y < 0 || y > 7
         false
@@ -82,7 +79,6 @@ class Board
     end
 
     def checkmate?(color)
-        # debugger
         any_moves = pieces.any? { |piece| color == piece.color && piece.valid_moves.length != 0 }
         return true if in_check?(color) && !any_moves
         false
@@ -105,6 +101,3 @@ class Board
         output
     end
 end
-
-# x = Board.new
-# puts x

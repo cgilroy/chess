@@ -64,7 +64,11 @@ class Knight < Piece
     end
 
     def symbol
-        "N"
+        if color == :black
+            "#{"\u265E".encode('utf-8')}"
+        else
+            "#{"\u2658".encode('utf-8')}"
+        end
     end
 
     def move_diffs
@@ -79,7 +83,11 @@ class Bishop < Piece
     end
 
     def symbol
-        "B"
+        if color == :black
+            "#{"\u265D".encode('utf-8')}"
+        else
+            "#{"\u2657".encode('utf-8')}"
+        end
     end
 
     def move_dirs
@@ -94,7 +102,11 @@ class Rook < Piece
     end
 
     def symbol
-        "R"
+        if color == :black
+            "#{"\u265C".encode('utf-8')}"
+        else
+            "#{"\u2656".encode('utf-8')}"
+        end
     end
 
     def move_dirs
@@ -109,7 +121,11 @@ class Queen < Piece
     end
 
     def symbol
-        "Q"
+        if color == :black
+            "#{"\u265B".encode('utf-8')}"
+        else
+            "#{"\u2655".encode('utf-8')}"
+        end
     end
 
     def move_dirs
@@ -124,7 +140,11 @@ class King < Piece
     end
 
     def symbol
-        "K"
+        if color == :black
+            "#{"\u265A".encode('utf-8')}"
+        else
+            "#{"\u2654".encode('utf-8')}"
+        end
     end
 
     def move_diffs
@@ -138,7 +158,11 @@ class Pawn < Piece
     end
 
     def symbol
-        "P"
+        if color == :black
+            "#{"\u265F".encode('utf-8')}"
+        else
+            "#{"\u2659".encode('utf-8')}"
+        end
     end
 
     def moves
@@ -161,7 +185,6 @@ class Pawn < Piece
     end
 
     def side_attacks
-        # debugger
         attacks = []
         step = forward_dir
         [[step,1],[step,-1]].each do |h,v|

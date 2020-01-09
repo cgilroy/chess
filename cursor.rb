@@ -77,7 +77,6 @@ class Cursor
   end
 
   def handle_key(key)
-    # debugger
     case key
     when :return, :space
       toggle_selected
@@ -93,7 +92,6 @@ class Cursor
   end
 
   def toggle_selected
-    # debugger
     @selected = !@selected
   end
 

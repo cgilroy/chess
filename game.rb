@@ -26,16 +26,13 @@ class Game
                         piece = @board[pick_up_pos]
                         raise ArgumentError.new("Not your turn!") if piece.color != @current_player && !piece.is_a?(NullPiece)
                         @board.move_piece(pick_up_pos,place_pos)
+                        swap_turn!
                     rescue ArgumentError => e
-                        pick_up_pos = nil
-                        place_pos = nil
                         puts e.message
                         sleep(2)
-                    else
-                        pick_up_pos = nil
-                        place_pos = nil
-                        swap_turn!
                     end
+                    pick_up_pos = nil
+                    place_pos = nil
                 end
             end
         end

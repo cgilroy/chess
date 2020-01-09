@@ -11,10 +11,7 @@ class Display
     end
 
     def render
-        # debugger
         piece = @board[@cursor.cursor_pos]
-        # puts "valid moves: #{piece.valid_moves}" if !piece.is_a?(NullPiece)
-        # puts "   0  1  2  3  4  5  6  7"
         (0..7).each do |row|
             row_str = ""
             (0..7).each do |col|
@@ -25,7 +22,6 @@ class Display
             end
             puts row_str
         end
-        # puts "   0  1  2  3  4  5  6  7"
     end
 
     def get_tile_bg_color(row,col)
@@ -37,11 +33,4 @@ class Display
         color
     end
 
-    def test_loop
-        loop do
-            system 'clear'
-            render
-            @cursor.get_input
-        end
-    end
 end
